@@ -17,7 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -46,7 +47,7 @@ class ProductController extends Controller
         ];
 
         if (Product::create($options)){
-            return redirect('/');
+            return redirect('/productos');
         }
         else{
             return view('products.create');
