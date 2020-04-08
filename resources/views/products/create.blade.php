@@ -7,9 +7,7 @@
                 <h4> {{ __('Crear nuevo producto') }} </h4>
             </header>
             <div class="card-body">
-                <form action="">
-
-                </form>
+                @include('products.form')
             </div>
         </div>
     </div>
