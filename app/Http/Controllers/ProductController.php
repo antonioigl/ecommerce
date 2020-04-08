@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 use function compact;
-use function dd;
 use function redirect;
 use function view;
 
@@ -69,7 +68,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -82,12 +81,25 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
+
     {
-        //
+        $product = Product::find($id);
+
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->price = $request->price;
+
+        if ($product->save()){
+            return redirect('/');
+        }
+        else{
+            return view('products.edit', compact('product'));
+        }
+
     }
 
     /**
