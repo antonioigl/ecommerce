@@ -11,10 +11,19 @@
         data() {
             return {
                 name: 'Products Component v2',
-                products: [
-                    {title: 'Curso Ruby', price: 200, description: 'Hola, mundo'},
-                    {title: 'Curso Laravel', price: 200, description: 'Hola, mundo'},
-                ]
+                products: [],
+                endpoint: '/productos'
+            }
+        },
+        created() {
+            this.fetchProducts();
+        },
+        methods: {
+            fetchProducts() {
+                axios.get(this.endpoint).then((response) => {
+                   console.log(response.data.data);
+                   this.products = response.data.data;
+                });
             }
         }
     }
