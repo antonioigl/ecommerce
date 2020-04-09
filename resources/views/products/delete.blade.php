@@ -1,5 +1,9 @@
-{!! Form::open([ 'method' => 'DELETE', 'route' => ['productos.destroy', $product->id], 'onsubmit' => 'return confirm("'. __('¿Estás seguro de eliminar este producto?') .'")']) !!}
+@auth
 
-    <input type="submit" value="{{__('Eliminar producto')}}" class="btn btn-danger">
+    {!! Form::open([ 'method' => 'DELETE', 'route' => ['productos.destroy', $product->id], 'onsubmit' => 'return confirm("'. __('¿Estás seguro de eliminar este producto?') .'")']) !!}
 
-{!! Form::close() !!}
+        <input type="submit" value="{{__('Eliminar producto')}}" class="btn btn-danger">
+
+    {!! Form::close() !!}
+
+@endauth
