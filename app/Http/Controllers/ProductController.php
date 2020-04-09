@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductsCollection;
 use App\Product;
 use Illuminate\Http\Request;
 use function compact;
@@ -26,7 +27,7 @@ class ProductController extends Controller
         $products = Product::paginate(15);
 
         if ($request->wantsJson()){
-            return $products->toJson();
+            return new ProductsCollection($products);
         }
 
         return view('products.index', compact('products'));
