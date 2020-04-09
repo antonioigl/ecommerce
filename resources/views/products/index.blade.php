@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+    <div>{{$shopping_cart->id}}</div>
     <div class="container">
         <div>
             <products-component></products-component>

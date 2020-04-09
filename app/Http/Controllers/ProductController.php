@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ProductsCollection;
 use App\Product;
+use App\ShoppingCart;
 use Illuminate\Http\Request;
 use function compact;
 use function redirect;
+use function session;
 use function view;
 
 class ProductController extends Controller
@@ -24,13 +26,20 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
+
+        $sessionName = 'shopping_cart_id';
+        $shopping_cart_id = session($sessionName);
+
+        $shopping_cart = ShoppingCart::findOrCreatedById($shopping_cart_id);
+        session(['shopping_cart_id' => $shopping_cart->id]);
+
         $products = Product::paginate(15);
 
         if ($request->wantsJson()){
             return new ProductsCollection($products);
         }
 
-        return view('products.index', compact('products'));
+        return view('products.index', compact('products', 'shopping_cart'));
     }
 
     /**
