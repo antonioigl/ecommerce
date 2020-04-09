@@ -49317,11 +49317,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            name: 'Products Component v2'
+            name: 'Products Component v2',
+            products: [{ title: 'Curso Ruby', price: 200, description: 'Hola, mundo' }, { title: 'Curso Laravel', price: 200, description: 'Hola, mundo' }]
         };
     }
 });
@@ -49334,7 +49348,34 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("p", [_vm._v(" Mi primer componente " + _vm._s(_vm.name))])
+  return _c("section", [
+    _c(
+      "div",
+      { staticClass: "row" },
+      _vm._l(_vm.products, function(product) {
+        return _c("div", { staticClass: "col-xs-12 col-sm-10 col-md-4" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("header", { staticClass: "bg-primary padding" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("h2", { staticClass: "card-title" }, [
+                _vm._v(_vm._s(product.title))
+              ]),
+              _vm._v(" "),
+              _c("h4", { staticClass: "card-subtitle" }, [
+                _vm._v(_vm._s(product.price))
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "card-text" }, [
+                _vm._v(_vm._s(product.description))
+              ])
+            ])
+          ])
+        ])
+      }),
+      0
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
