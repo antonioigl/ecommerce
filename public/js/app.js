@@ -49312,6 +49312,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -49333,6 +49340,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(response.data.data);
                 _this.products = response.data.data;
             });
+        },
+        beforeEnter: function beforeEnter(el) {
+            el.style.opacity = 0;
+            el.style.transform = 'scale(0)';
+            el.style.transition = 'all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1)';
+        },
+        enter: function enter(el) {
+            setTimeout(function () {
+                el.style.opacity = 1;
+                el.style.transform = 'scale(1)';
+            }, 300);
+        },
+        leave: function leave(el) {
+            el.style.opacity = 0;
+            el.style.transform = 'scale(0)';
         }
     }
 });
@@ -49345,16 +49367,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", [
-    _c(
-      "div",
-      { staticClass: "row" },
-      _vm._l(_vm.products, function(product) {
-        return _c("product-card-component", { attrs: { product: product } })
-      }),
-      1
-    )
-  ])
+  return _c(
+    "section",
+    [
+      _c(
+        "transition-group",
+        {
+          staticClass: "row",
+          attrs: { tag: "div", css: false, name: "fadeIn" },
+          on: {
+            "before-enter": _vm.beforeEnter,
+            enter: _vm.enter,
+            leave: _vm.leave
+          }
+        },
+        _vm._l(_vm.products, function(product) {
+          return _c("product-card-component", {
+            key: product.id,
+            attrs: { product: product }
+          })
+        }),
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
