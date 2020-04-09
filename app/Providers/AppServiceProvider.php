@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
             $shopping_cart = ShoppingCart::findOrCreatedById($shopping_cart_id);
             session([$sessionName => $shopping_cart->id]);
 
-            $view->with('productsCount', $shopping_cart->id);
+            $view->with('productsCount', $shopping_cart->productsCount());
         });
     }
 
