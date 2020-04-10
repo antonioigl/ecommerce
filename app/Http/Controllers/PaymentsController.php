@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Paypal;
+use function array_filter;
+use function array_values;
+use function redirect;
 
 class PaymentsController extends Controller
 {
@@ -14,6 +17,16 @@ class PaymentsController extends Controller
 
     public function pay(Request $request)
     {
-        return $request->shopping_cart->amount();
+        $amount = $request->shopping_cart->amount();
+        $paypal = new Paypal();
+        $response = $paypal->charge($amount);
+
+        $redirectLinks = array_filter($response->result->links, function($link){
+            return $link->method == 'REDIRECT';
+        });
+
+        $redirectLinks = array_values($redirectLinks);
+
+        return redirect($redirectLinks[0]->href);
     }
 }

@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Support\Facades\Config;
 use PayPal\Core\PayPalHttpClient;
 use PayPal\v1\Payments\PaymentCreateRequest;
-use PayPal\v1\Payments\PaymentExecuteRequest;
 use PayPal\Core\SandboxEnvironment;
 use PayPal\Core\PayPalEnvironment; //ProductionEnvironment for production calls
 
@@ -49,9 +48,7 @@ class Paypal
     }
 
     public function charge($amount){
-        $this->client->execute($this->buildPaymentRequest($amount));
-        $paypal = new Paypal();
-        $paypal->charge($amount);
+       return $this->client->execute($this->buildPaymentRequest($amount));
     }
 
 
