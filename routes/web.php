@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('/carrito', 'ShoppingCartController@show')->name('shopping_cart.show');
 Route::get('/carrito/productos', 'ShoppingCartController@products')->name('shopping_cart.products');
 
+Route::get('/pagar', 'PaymentsController@pay')->name('payments.pay');
+
 Route::resource('productos', 'ProductController');
 
 Route::resource('in_shopping_carts', 'ProductInShoppingCartsController', [

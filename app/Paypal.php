@@ -48,6 +48,13 @@ class Paypal
         return $request;
     }
 
+    public function charge($amount){
+        $this->client->execute($this->buildPaymentRequest($amount));
+        $paypal = new Paypal();
+        $paypal->charge($amount);
+    }
+
+
     // Ejecución de cobro
 
 }
