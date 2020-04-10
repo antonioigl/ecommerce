@@ -7,6 +7,7 @@ use App\Product;
 use Illuminate\Http\Request;
 use function compact;
 use function redirect;
+use function session;
 use function view;
 
 class ProductController extends Controller

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use Illuminate\Http\Request;
 use App\Paypal;
+use Illuminate\Support\Facades\URL;
 use function array_filter;
 use function array_values;
 use function redirect;
+use function session;
+use function view;
 
 class PaymentsController extends Controller
 {
@@ -35,6 +39,16 @@ class PaymentsController extends Controller
         $paypal = new Paypal();
         $response = $paypal->execute($request->paymentId, $request->PayerID);
 
-        return $response;
+        if ($response->statusCode == 200){
+
+            $order = Order::createFromPaypalResponse($response->result, $request->shooping_cart);
+            if ($order) {
+                session()->forget('shooping_cart_id');
+                return view('payments.success', ['shopping_cart' => $request->shopping_cart, 'order' => $order]);
+            }
+        }
+        else{
+            redirect(URL::route('shooping_cart.shor'));
+        }
     }
 }
