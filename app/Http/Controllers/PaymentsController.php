@@ -29,4 +29,12 @@ class PaymentsController extends Controller
 
         return redirect($redirectLinks[0]->href);
     }
+
+    public function execute(Request $request)
+    {
+        $paypal = new Paypal();
+        $response = $paypal->execute($request->paymentId, $request->PayerID);
+
+        return $response;
+    }
 }

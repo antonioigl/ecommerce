@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\URL;
 use PayPal\Core\PayPalHttpClient;
 use PayPal\v1\Payments\PaymentCreateRequest;
 use PayPal\Core\SandboxEnvironment;
@@ -38,8 +39,8 @@ class Paypal
               'payment_method' => 'paypal',
             ],
             'redirect_urls' => [
-                'cancel_url' => '/',
-                'return_url' => '/',
+                'cancel_url' => URL::route('shopping_cart.show'),
+                'return_url' => URL::route('payments.execute'),
             ]
         ];
         $request->body = $body;
@@ -51,7 +52,15 @@ class Paypal
        return $this->client->execute($this->buildPaymentRequest($amount));
     }
 
-
     // Ejecución de cobro
+    public function execute($paymentId, $payerId)
+    {
+        $paymentExecute = new PaymentCreateRequest($paymentId);
+        $paymentExecute->body = [
+            'payer_id' => $payerId,
+        ];
+
+        return $this->client->execute($paymentExecute);
+    }
 
 }

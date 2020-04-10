@@ -21,6 +21,7 @@ Route::get('/carrito', 'ShoppingCartController@show')->name('shopping_cart.show'
 Route::get('/carrito/productos', 'ShoppingCartController@products')->name('shopping_cart.products');
 
 Route::get('/pagar', 'PaymentsController@pay')->name('payments.pay');
+Route::get('/pagar/completar', 'PaymentsController@execute')->name('payments.execute');
 
 Route::resource('productos', 'ProductController');
 

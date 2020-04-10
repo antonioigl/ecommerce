@@ -16,7 +16,7 @@
                         <img src="/images/cards.png" alt="" width="120">
                         <img src="/images/paypal.png" alt="" width="120">
                         <div>
-                            <a href="" class="btn btn-primary">{{ __('Proceder al pago') }}</a>
+                            <a href="/pagar" class="btn btn-primary">{{ __('Proceder al pago') }}</a>
                         </div>
                     </div>
                 </div>
